@@ -33,7 +33,7 @@ cd Technical-Test `
 cd backend-laravel-sqlite
 composer update
 composer install
-php artisan key:generate
+php artisan key:generate (opcional)
 php artisan migrate
 php artisan serve
 ```
