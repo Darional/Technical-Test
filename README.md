@@ -1,6 +1,6 @@
 # Test técnico para Ulern
 ## Descripción
-Al ingresar a http://localhost:8080, se observa la página en la que se puede seleccionar tanto el login como el register. Una vez registrado un usuario, puede acceder a los datos de este seleccionando la opción de login.
+Proyecto desarrollado en ambiente Linux. Al ingresar a http://localhost:8080, se observa la página en la que se puede seleccionar tanto el login como el register. Una vez registrado un usuario, puede acceder a los datos de este seleccionando la opción de login.
 ## Requerimientos
 
 * PHP 8.2 o superior
