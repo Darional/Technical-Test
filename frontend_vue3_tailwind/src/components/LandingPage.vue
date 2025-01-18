@@ -58,14 +58,16 @@
               required />
 
             <label class="form-label" for="tel">Número de Teléfono</label>
-            <input class="form-input" type="text" v-model="registertel" name="tel" autocomplete="tel" required />
+            <input class="form-input" type="text" v-model="registertel" name="tel" autocomplete="tel" required
+              @input="errorMessageregister = ''" />
 
             <label class="form-label" for="email">Email</label>
-            <input class="form-input" type="email" v-model="registeremail" name="email" autocomplete="email" required />
+            <input class="form-input" type="email" v-model="registeremail" name="email" autocomplete="email" required
+              @input="errorMessageregister = ''" />
 
             <label class="form-label" for="password">Contraseña</label>
             <input class="form-input" type="password" v-model="registerpassword" name="password"
-              autocomplete="new-password" required />
+              autocomplete="new-password" required @input="errorMessageregister = ''" />
 
             <label class="form-label" for="password_confirmation">Confirmar Contraseña</label>
             <input class="form-input" type="password" v-model="registerpassword_confirmation"
@@ -73,6 +75,8 @@
 
             <button class="form-button" type="submit">Registrarse</button>
             <p v-if="errorMessageregister" style="color: red;">{{ errorMessageregister }}</p>
+            <p v-if="successMessage" class="text-green-500 font-medium mb-2">
+              {{ successMessage }}</p>
           </fieldset>
         </form>
       </div>
@@ -94,6 +98,7 @@ const loginemail = ref('')
 const loginpassword = ref('')
 const errorMessagelogin = ref('')
 const errorMessageregister = ref('')
+const successMessage = ref('');
 const message = ref('')
 const registerpassword_confirmation = ref('')
 const router = useRouter();
@@ -102,6 +107,10 @@ let selection = ref(0);
 
 
 const register = async () => {
+  if (!validatePhoneNumber(registertel.value)) {
+    errorMessageregister.value = 'Número de teléfono inválido';
+    return;
+  }
   try {
     const response = await api.post('/register', {
       name: registername.value,
@@ -112,11 +121,29 @@ const register = async () => {
       password_confirmation: registerpassword_confirmation.value,
     });
     message.value = response.data.message;
+    successMessage.value = '¡Usuario registrado exitosamente!';
   }
   catch (error) {
-    errorMessageregister.value = 'Revise sus datos';
-    console.error(error);
+    if (error.response && error.response.status === 422) {
+      const errors = error.response.data.errors;
+
+      if (errors.email) {
+        errorMessageregister.value = 'El correo ya está registrado.';
+      }
+
+      else if (errors.password) {
+        errorMessageregister.value = 'La contraseña debe ser de al menos 8 caracteres.';
+      }
+
+      else {
+        errorMessageregister.value = 'Error en el registro. Revisa los campos ingresados.';
+      }
+    } else {
+      errorMessageregister.value = 'Error en el servidor. Intenta nuevamente más tarde.';
+      console.error(error);
+    }
   }
+
 }
 
 const login = async () => {
@@ -135,6 +162,13 @@ const login = async () => {
     console.error(error);
   }
 }
+
+const validatePhoneNumber = (phone) => {
+  const regex = /^\+?\d{1,3}[- ]?\d{8,15}$/;
+  return regex.test(phone);
+};
+
+
 </script>
 
 <script>
