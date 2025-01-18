@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Styles for Login and Register Buttons */
+.selection-option {
+    @apply text-base font-medium h-14 relative hover:bg-zinc-100 flex items-center px-3 gap-3 rounded-lg has-[:checked]:text-indigo-500 has-[:checked]:bg-indigo-50 has-[:checked]:ring-indigo-300 has-[:checked]:ring-1 select-none;
+}
+
+/* Styles for Login and Register Form */
+.form-container {
+    @apply text-base text-indigo-500; 
+}
+.form-fieldset {
+    @apply border-4 border-dotted border-indigo-500 p-5;
+}
+.form-legend {
+    @apply text-base px-2 italic -mx-2; 
+}
+.form-label {
+    @apply text-base font-medium after:content-['*'] after:text-red-400; 
+}
+.form-input {
+    @apply text-base w-full p-2 mb-2 mt-1 outline-none ring-0 focus:ring-2 focus:ring-indigo-500; 
+}
+.form-button {
+    @apply text-base w-full rounded bg-indigo-500 text-indigo-50 p-2 text-center font-medium hover:bg-indigo-400 mt-2; 
+}
