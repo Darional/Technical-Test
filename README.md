@@ -1,50 +1,29 @@
-# Test técnico para Ulern
+# Vue3 and Laravel 11 with Docker (In process 22-01-2024)
 ## Descripción
-Proyecto desarrollado en ambiente Linux. Al ingresar a http://localhost:8080, se observa la página en la que se puede seleccionar tanto el login como el register. Una vez registrado un usuario, puede acceder a los datos de este seleccionando la opción de login.
-## Requerimientos
+Project designed to work in Docker's container. It's a form of a basic register-loggin
+## Prerequisites
+Before you start, make sure you have the following installed:
+- [Docker](https://www.docker.com/) (Version 20.10 or later)
+- (Optional) A text editor like [VS Code](https://code.visualstudio.com/) for exploring the project files.
 
-* PHP 8.2 o superior
+---
+## Getting Started
+### Clone the repository
 ```bash
-sudo add-apt-repository ppa:ondrej/php
-sudo apt update
-sudo apt install php8.3 php8.3-cli php8.3-{bz2,curl,mbstring,intl}
-sudo apt install php8.3-sqlite3
-```
-* Composer 2.2.6
-```bash
-sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-sudo apt install -y php8.3-xml
-sudo apt install php8.3-sqlite3
+git clone https://github.com/Darional/Technical-Test.git
 ```
 
-* NPM 11.0.0
+### Build and Run the Docker Image
+Follow these steps to build and run the project:
+1. Build the Docker image
 ```bash
-sudo apt install npm
+docker build frontend-vue3 .
 ```
-
-### 1. Clonar el repositorio
+2. Run the Docker container at the port 8080
 ```bash
-git https://github.com/Darional/Technical-Test.git
-cd Technical-Test `
+docker run -p 8080:8080 frontend-vue3
 ```
-
-### 2. Configuración del Backend
+3. Access to the Application
 ```bash
-cd backend-laravel-sqlite
-composer update
-composer install
-php artisan key:generate (opcional)
-php artisan migrate
-php artisan serve
+http://localhost:8080
 ```
-### 3. Configuración del Frontend
-
-```bash
-cd frontend_vue3_tailwind
-npm install
-npm run serve
-```
-
-### 4. Acceso a la Aplicación
-* Frontend http://localhost/8080
-
