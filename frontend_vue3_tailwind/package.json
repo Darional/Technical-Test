@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "autoprefixer": "^10",
+    "@vue/cli-service": "^5.0.8",
     "axios": "^1.7.9",
     "core-js": "^3.40.0",
     "postcss": "^8",
